@@ -1,274 +1,501 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-    <meta charset="utf-8">
-
-    <title>500NewYorkFilteredRVenues.csv (editing)</title>
-    <link id="favicon" rel="shortcut icon" type="image/x-icon" href="/static/base/images/favicon-file.ico?v=e2776a7f45692c839d6eea7d7ff6f3b2">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="/static/components/jquery-ui/themes/smoothness/jquery-ui.min.css?v=9b2c8d3489227115310662a343fce11c" type="text/css" />
-    <link rel="stylesheet" href="/static/components/jquery-typeahead/dist/jquery.typeahead.min.css?v=7afb461de36accb1aa133a1710f5bc56" type="text/css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-<link rel="stylesheet" href="/static/components/codemirror/lib/codemirror.css?v=288352df06a67ee35003b0981da414ac">
-<link rel="stylesheet" href="/static/components/codemirror/addon/dialog/dialog.css?v=c89dce10b44d2882a024e7befc2b63f5">
-
-    <link rel="stylesheet" href="/static/style/style.min.css?v=4e52139bcf73c6fa106fdc159205a39b" type="text/css"/>
-    
-
-    <link rel="stylesheet" href="/custom/custom.css" type="text/css" />
-    <script src="/static/components/es6-promise/promise.min.js?v=f004a16cb856e0ff11781d01ec5ca8fe" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/components/preact/index.js?v=00a2fac73c670ce39ac53d26640eb542" type="text/javascript"></script>
-    <script src="/static/components/proptypes/index.js?v=c40890eb04df9811fcc4d47e53a29604" type="text/javascript"></script>
-    <script src="/static/components/preact-compat/index.js?v=f865e990e65ad27e3a2601d8adb48db1" type="text/javascript"></script>
-    <script src="/static/components/requirejs/require.js?v=6da8be361b9ee26c5e721e76c6d4afce" type="text/javascript" charset="utf-8"></script>
-    <script>
-      require.config({
-          
-          urlArgs: "v=20180831052216",
-          
-          baseUrl: '/static/',
-          paths: {
-            'auth/js/main': 'auth/js/main.min',
-            custom : '/custom',
-            nbextensions : '/nbextensions',
-            kernelspecs : '/kernelspecs',
-            underscore : 'components/underscore/underscore-min',
-            backbone : 'components/backbone/backbone-min',
-            jed: 'components/jed/jed',
-            jquery: 'components/jquery/jquery.min',
-            json: 'components/requirejs-plugins/src/json',
-            text: 'components/requirejs-text/text',
-            bootstrap: 'components/bootstrap/js/bootstrap.min',
-            bootstraptour: 'components/bootstrap-tour/build/js/bootstrap-tour.min',
-            'jquery-ui': 'components/jquery-ui/ui/minified/jquery-ui.min',
-            moment: 'components/moment/min/moment-with-locales',
-            codemirror: 'components/codemirror',
-            termjs: 'components/xterm.js/xterm',
-            typeahead: 'components/jquery-typeahead/dist/jquery.typeahead.min',
-          },
-          map: { // for backward compatibility
-              "*": {
-                  "jqueryui": "jquery-ui",
-              }
-          },
-          shim: {
-            typeahead: {
-              deps: ["jquery"],
-              exports: "typeahead"
-            },
-            underscore: {
-              exports: '_'
-            },
-            backbone: {
-              deps: ["underscore", "jquery"],
-              exports: "Backbone"
-            },
-            bootstrap: {
-              deps: ["jquery"],
-              exports: "bootstrap"
-            },
-            bootstraptour: {
-              deps: ["bootstrap"],
-              exports: "Tour"
-            },
-            "jquery-ui": {
-              deps: ["jquery"],
-              exports: "$"
-            }
-          },
-          waitSeconds: 30,
-      });
-
-      require.config({
-          map: {
-              '*':{
-                'contents': 'services/contents',
-              }
-          }
-      });
-
-      // error-catching custom.js shim.
-      define("custom", function (require, exports, module) {
-          try {
-              var custom = require('custom/custom');
-              console.debug('loaded custom.js');
-              return custom;
-          } catch (e) {
-              console.error("error loading custom.js", e);
-              return {};
-          }
-      })
-
-    document.nbjs_translations = {"domain": "nbjs", "locale_data": {"nbjs": {"": {"domain": "nbjs"}}}};
-    document.documentElement.lang = navigator.language.toLowerCase();
-    </script>
-
-    
-    
-
-</head>
-
-<body class="edit_app "
- 
-data-base-url="/"
-data-file-path="500NewYorkFilteredRVenues.csv"
-
-  
-    data-jupyter-api-token="cdd046a54d6059760df5a94972e7545e79c0f570ebb0e13b"
-  
- 
-
-dir="ltr">
-
-<noscript>
-    <div id='noscript'>
-      Jupyter Notebook requires JavaScript.<br>
-      Please enable it to proceed. 
-  </div>
-</noscript>
-
-<div id="header">
-  <div id="header-container" class="container">
-  <div id="ipython_notebook" class="nav navbar-brand"><a href="/tree?token=cdd046a54d6059760df5a94972e7545e79c0f570ebb0e13b" title='dashboard'>
-      <img src='/static/base/images/logo.png?v=641991992878ee24c6f3826e81054a0f' alt='Jupyter Notebook'/>
-  </a></div>
-
-  
-
-<span id="save_widget" class="pull-left save_widget">
-    <span class="filename"></span>
-    <span class="last_modified"></span>
-</span>
-
-
-  
-  
-  
-  
-
-    <span id="login_widget">
-      
-        <button id="logout" class="btn btn-sm navbar-btn">Logout</button>
-      
-    </span>
-
-  
-
-  
-  
-  </div>
-  <div class="header-bar"></div>
-
-  
-
-<div id="menubar-container" class="container">
-  <div id="menubar">
-    <div id="menus" class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-          <p  class="navbar-text indicator_area">
-          <span id="current-mode" >current mode</span>
-          </p>
-        <button type="button" class="btn btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <i class="fa fa-bars"></i>
-          <span class="navbar-text">Menu</span>
-        </button>
-        <ul class="nav navbar-nav navbar-right">
-          <li id="notification_area"></li>
-        </ul>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">File</a>
-              <ul id="file-menu" class="dropdown-menu">
-                <li id="new-file"><a href="#">New</a></li>
-                <li id="save-file"><a href="#">Save</a></li>
-                <li id="rename-file"><a href="#">Rename</a></li>
-                <li id="download-file"><a href="#">Download</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit</a>
-              <ul id="edit-menu" class="dropdown-menu">
-                <li id="menu-find"><a href="#">Find</a></li>
-                <li id="menu-replace"><a href="#">Find &amp; Replace</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Key Map</li>
-                <li id="menu-keymap-default"><a href="#">Default<i class="fa"></i></a></li>
-                <li id="menu-keymap-sublime"><a href="#">Sublime Text<i class="fa"></i></a></li>
-                <li id="menu-keymap-vim"><a href="#">Vim<i class="fa"></i></a></li>
-                <li id="menu-keymap-emacs"><a href="#">emacs<i class="fa"></i></a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">View</a>
-              <ul id="view-menu" class="dropdown-menu">
-              <li id="toggle_header" title="Show/Hide the logo and notebook title (above menu bar)">
-              <a href="#">Toggle Header</a></li>
-              <li id="menu-line-numbers"><a href="#">Toggle Line Numbers</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Language</a>
-              <ul id="mode-menu" class="dropdown-menu">
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="lower-header-bar"></div>
-
-
-</div>
-
-<div id="site">
-
-
-<div id="texteditor-backdrop">
-<div id="texteditor-container" class="container"></div>
-</div>
-
-
-</div>
-
-
-
-
-
-
-    
-
-
-<script src="/static/edit/js/main.min.js?v=348961331b73f20e2a436cec25bcca52" type="text/javascript" charset="utf-8"></script>
-
-
-<script type='text/javascript'>
-  function _remove_token_from_url() {
-    if (window.location.search.length <= 1) {
-      return;
-    }
-    var search_parameters = window.location.search.slice(1).split('&');
-    for (var i = 0; i < search_parameters.length; i++) {
-      if (search_parameters[i].split('=')[0] === 'token') {
-        // remote token from search parameters
-        search_parameters.splice(i, 1);
-        var new_search = '';
-        if (search_parameters.length) {
-          new_search = '?' + search_parameters.join('&');
-        }
-        var new_url = window.location.origin + 
-                      window.location.pathname + 
-                      new_search + 
-                      window.location.hash;
-        window.history.replaceState({}, "", new_url);
-        return;
-      }
-    }
-  }
-  _remove_token_from_url();
-</script>
-</body>
-
-</html>
+City,Neighborhood,Neighborhood Latitude,Neighborhood Longitude,Number of Recommendation,Recommend Reason,Venue ID,Venue Name,Venue Latitude,Venue Longitude,Venue Address,Category ID,Category Name,Category ICON,Likes
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4aabd3e6f964a5204a5a20e3,Zero Otto Nove,40.85471353015844,-73.88838751470229,2357 Arthur Ave (at E 186th St),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,217
+New York,Throgs Neck,40.81510925804005,-73.81635002158441,0,This spot is popular,4b4b9f1df964a5201fa226e3,Tosca Café,40.819204436132736,-73.81746681637895,4034 E Tremont Ave (at Miles Ave),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,167
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4b4b9f1df964a5201fa226e3,Tosca Café,40.819204436132736,-73.81746681637895,4034 E Tremont Ave (at Miles Ave),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,167
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4acf80aef964a52025d420e3,Tino's Delicatessen,40.85588217093613,-73.88716612015719,2410 Arthur Ave (E. 187 St.),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,137
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,50e600a4526287052c53bb99,The Bronx Beer Hall,40.854197571164775,-73.88823312783984,2344 Arthur Ave (btwn E186th St & E 184th St),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,129
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4b4929d2f964a520656826e3,Taqueria Tlaxcali,40.83609833012624,-73.85494781241097,2103 Starling Ave (Olmstead St & Odell St),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,122
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4a9880f5f964a520692c20e3,The Kettle Black,40.62283909856897,-74.03141082168587,8622 3rd Ave (at 87th St.),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,115
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4aee1220f964a520ced121e3,Full Moon Pizzeria,40.855505712207126,-73.88755698445503,600 E 187th St (at Arthur Ave.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,113
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4c423ed0520fa5938ef4caac,Westchester Square,40.84068773802338,-73.84268455731083,Westchester Square (Tremont Av),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,102
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4af0fa29f964a52060e021e3,Antonio's Trattoria,40.854082862115455,-73.88661644989108,2370 Belmont Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,100
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4aa425bef964a5208e4520e3,Dominick's Restaurant,40.85421506482662,-73.88876521498301,2335 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,96
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4b10591af964a5205f6e23e3,Patricia's,40.84931298339339,-73.85353576737785,1082 Morris Park Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,78
+New York,Baychester,40.866858107252696,-73.83579759808117,0,This spot is popular,4f5ce789e4b0a4baa3d5dbb6,Planet Fitness,40.86329786974066,-73.83556764832478,1780 E Gun Hill Rd,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,76
+New York,Baychester,40.866858107252696,-73.83579759808117,0,This spot is popular,4ac18d7ff964a5207a9720e3,TGI Fridays,40.86318917967161,-73.83380672336443,51780 East Gun Hill Road,4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,72
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,53a0be61498eeec38e5112e0,Starbucks,40.86063643,-73.89027008,440 E Fordham Rd (at 3rd Ave),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,68
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bb6496e46d4a59398fdc5c0,Madonia Bakery,40.85441232476012,-73.88851590024353,2348 Arthur Ave,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,68
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4ae8732df964a5206daf21e3,Casa Della Mozzarella,40.85543999994273,-73.88737265373734,604 E 187th St (Arthur Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,66
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,4b5357adf964a520319827e3,Dunkin' Donuts,40.87699277991182,-73.90650658230923,5501 Broadway (W 230th St),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,65
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c27e5e0fe6e2d7f4f84523c,Estrellita Poblana,40.85400959882801,-73.88892348848158,2328 Arthur Ave (at Crescent Ave),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,64
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4ab52b10f964a520f37220e3,Artuso's,40.854324604875096,-73.88511207332353,670 E 187th St,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,62
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,5127e5c7e4b0447b9f67b41d,Brooklyn Market,40.626939,-74.02994799999999,8102 3rd Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,58
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4a8e261cf964a5201c1220e3,Roberto,40.85369167602314,-73.88835483664272,603 Crescent Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,57
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4ace366bf964a5201bcf20e3,Mike's Deli,40.85413107559137,-73.8881359312148,2344 Arthur Ave (E 186th St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,51
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b2a6ba8f964a520d9a824e3,Pugsley Pizza,40.8588177574385,-73.88480770171738,590 E 191st St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,51
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4aa193d5f964a520124120e3,Mario's Restaurant & Catering,40.854243777661196,-73.88843667516853,2342 Arthur Ave (at Crescent Ave),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,51
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4ba92d21f964a5209e113ae3,Dunkin' Donuts,40.852559698283116,-73.82735854360085,3276 Westchester Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,51
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4ae0c38ef964a5203d8221e3,Ann Clair's Salumeria,40.85004616007053,-73.8517963510315,1130 Morris Park Ave (Williamsbridge Road),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,50
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,462d15a3f964a520e7451fe3,Planet Fitness,40.84829046054853,-73.83087490241945,3060 Westchester Ave,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,49
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b0f1505f964a520f45e23e3,Chadwick's Restaurant,40.621449623364306,-74.03196395076446,8822 3rd Ave (3rd Ave),4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,47
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,5095bdf0e4b05f8bb6164223,Applebee's Grill + Bar,40.83757175,-73.86083206,65 Metropolitan Oval,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,46
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4b4e3e87f964a5209de626e3,Patricia's of Tremont,40.823118889430276,-73.81940281496017,3883 E Tremont Ave (btwn Schley & Dewey Ave.),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,45
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4b720280f964a520d9692de3,Estrellita Poblana IV,40.842072240941214,-73.84404435344297,45 Westchester Sq (at Roberts Ave.),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,44
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4c1c5630e9c4ef3b4ccd45aa,Conti's Pastry Shoppe,40.845905639607956,-73.86283608706798,786 Morris Park Ave (btw Barnes & Wallace),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,44
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4bf471c198ac0f47190664a8,Muscle Maker Grill,40.81939123374593,-73.81729767562672,4041 E Tremont Ave (at Miles Ave),4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,43
+New York,Throgs Neck,40.81510925804005,-73.81635002158441,0,This spot is popular,4bf471c198ac0f47190664a8,Muscle Maker Grill,40.81939123374593,-73.81729767562672,4041 E Tremont Ave (at Miles Ave),4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,43
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4aea55fdf964a52018bb21e3,Pruzzo's,40.846830893319044,-73.83266303397475,2937 Westchester Ave (Buhre Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,42
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4f2e27bee4b010c5f6982ad7,Brewski's Bar & Grill,40.82664104244332,-73.82248599450232,3518 E Tremont Ave. (at Phillip Ave.),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,42
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b6f03f5f964a52004d72ce3,Greenhouse Cafe,40.62954152835763,-74.02851357046862,7717 3rd Ave (btwn 77th & 78th St),4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,42
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4adb9b03f964a520552921e3,Ellie's Diner,40.83788039213797,-73.86013179887586,58 Metropolitan Oval (Unionport Rd),4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,42
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4b2035e6f964a520bc2e24e3,Emilio's Pizza,40.848934633803005,-73.85457970598979,1051 Morris Park Ave (at Hone Ave.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,41
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,4514ed4df964a520e5391fe3,Artie's Steak and Seafood,40.849542144998146,-73.78731730033616,394 City Island Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,41
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4c453ad4dcd61b8d0e7f7c56,Mullaly Park,40.83291951037224,-73.92433132931737,Jerome Avenue (164th to 167th Street),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,39
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bc22a22920eb713bcc51b2c,Tra Di Noi,40.855139534007634,-73.88679442998631,622 E 187th St,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,38
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4af71916f964a520cf0522e3,Michaelangelo's Coal Fired Brick Oven Pizza Restaurant,40.85741189614754,-73.88646821282298,2477 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,38
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4af1a473f964a520c5e121e3,Egidio Pastry Shop,40.85514224140267,-73.88697184841936,622 E 187th St (at Hughes Ave),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,37
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b5514c4f964a5207cda27e3,Enzo's,40.854354554251444,-73.88864359312625,2339 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,36
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4c4d70b351c2c928071bc79c,24 Hour Fitness,40.861418551442696,-73.89146133625549,400 E Fordham Rd (Webster Ave),4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,35
+New York,Port Morris,40.801663627756206,-73.91322139386135,0,This spot is popular,582baed1d469ec3b55b87363,Gun Hill Tavern,40.80096175687351,-73.9137118163977,2515 3rd Ave (E 137th St),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,35
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4b9c08adf964a5201c4336e3,Planet Fitness,40.86261880907894,-73.89439013170312,309 E Fordham Rd,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,35
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4b647ca3f964a52030b72ae3,Dunkin' Donuts,40.841108534760835,-73.83925344315907,2973 E Tremont Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,34
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b5beedef964a520da1d29e3,Duane Reade,40.6220933,-74.0276287,436 86th St,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,34
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,58935fd798f8aa7c14662653,Kingsbridge Social Club,40.88454548045115,-73.90196378126393,3625 Kingsbridge Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,33
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4b4e3fd0f964a520c8e626e3,CVS/pharmacy,40.82561694240552,-73.82075125799814,3775 E Tremont Ave (at Randall Ave.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,33
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4b15abb6f964a5202fb223e3,Walgreens,40.8785384,-73.9047797,5564 Broadway,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,33
+New York,Eastchester,40.887555677350775,-73.82780644716412,0,This spot is popular,4ba3782cf964a520b43f38e3,Dunkin Donuts,40.88548117663743,-73.82801495153132,4090 Boston Rd (Conner Street),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,32
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,53b89de7498e8be468fd777d,Cabo,40.825959684250584,-73.82135166456302,3764 E Tremont Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,32
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,558b30d0498e2fb129a2a42b,Tilila,40.88387242577101,-73.89820853750416,3648 Bailey Avenue (Off 238th Street),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,32
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b58f8f2f964a5203f7628e3,Peppino's,40.6298508137169,-74.02848135082027,7708 3rd Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,32
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,553d5376498e322eb4d37a1b,Chipotle Mexican Grill,40.88445493712577,-73.9007461344216,193 W 237th St,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,31
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4a343f1ef964a520f69b1fe3,Leo's Casa Calamari,40.62334803451453,-74.03108161481818,8602 3rd Ave (at 86 St),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,31
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4c9205941adc370460a134d1,Zeppieri & Sons Italian Bakery,40.847119272159645,-73.83205709805584,3004 Buhre Ave (Crosby Avenue),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,30
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b5a4c8ff964a52049bb28e3,Emilia's Restaurant,40.85412010500031,-73.88890998498077,2331 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,30
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4bfb0096bbb7c9284e8f0743,Dunkin Donuts,40.84534574587194,-73.86594183933315,699 Morris Park Ave (White Plains Road),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,30
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b5bc595f964a520431529e3,Pasquale Riggaletto's,40.853744601208376,-73.88926386660914,2311 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,30
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4e38a2cfbd415d9f63d71183,Dunkin Donuts,40.87914592226027,-73.90526025380221,209 W 231st St,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,29
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4f0f4fe14fc6e3adf353a950,Blink Fitness,40.81954303461479,-73.91055416353106,744 Saint Anns Ave (St. Ann's Avenue & E 156 St),4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,29
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,4bf048ddc8d920a17fae9430,Lickety Split Ice Cream,40.84676548172612,-73.7864031834924,295 City Island Avenue,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,29
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,45164517f964a5200a3a1fe3,Black Whale,40.846397849807644,-73.78643822317905,279 City Island Ave (at Hawkins St),4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,29
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4bb114c4f964a520b9783ce3,Sam's Pizza,40.87943501792795,-73.90585879861192,232 W 231st St (Godwin Terrace),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,28
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4b451a29f964a520ad0426e3,Beccofino,40.9054667242996,-73.90042336967397,5704 Mosholu Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,27
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4af6ea31f964a520190422e3,Mosholu Park,40.87823436524028,-73.8831639289856,85 E Mosholu Pkwy N (Kossuth avenue),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,27
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,51bb492d498e4a3ea2ebf17d,Primavera Cafe,40.86200374119285,-73.89153741654775,387 E Fordham Rd,4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,26
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,4c0bc649bbc676b096fb4bd5,Dunkin Donuts,40.83410478036185,-73.85168252684963,2172 Westchester Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,26
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b2a6b07f964a520c6a824e3,Simon's Deli & Bagels,40.857424338663805,-73.88597284190821,2479 Arthur Ave (189th Street),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,25
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b991f43f964a520d06235e3,Dunkin' Donuts,40.62186792371999,-74.02878903668005,8704 4th Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,24
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,5217dd2811d2d06ccafb77d3,Estrellita Poblana V,40.879687039717524,-73.906256832975,240 W 231st St,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,24
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4b82201df964a52022cb30e3,Rite Aid,40.885481,-73.900814,5825-35 Broadway (at 238th St),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,24
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,5529d964498ec65bfc27ad91,Chipotle Mexican Grill,40.8604009481694,-73.89093129593032,4760 3rd Ave (Third Avenue & East 189th Street),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,23
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,5529d964498ec65bfc27ad91,Chipotle Mexican Grill,40.8604009481694,-73.89093129593032,4760 3rd Ave (Third Avenue & East 189th Street),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,23
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bb6470cef159c7465b275f7,Calabria Pork Store,40.85414529023418,-73.88877606219484,2338 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,23
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4b5b9ebbf964a5207d0b29e3,Williamsbridge Reservoir Oval,40.87703278924706,-73.87733074138687,3225 Reservoir Oval W,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,23
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,55f81cd2498ee903149fcc64,Starbucks,40.87753134921497,-73.90558216359267,171 W 230th St (Kimberly Pl),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,22
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4adb7364f964a520a32721e3,Areo Ristorante,40.62441504357729,-74.03078200570984,8424 3rd Ave (at 84th St.),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,22
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4bf96ae65317a593d837017f,Enzo's,40.854232311821725,-73.85436243306151,1998 Williamsbridge Rd,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,22
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b366de6f964a5202d3525e3,Addeo & Sons Bakery,40.85449717034133,-73.88759144753934,2372 Hughes Ave (E186th),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,22
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4bafb541f964a520a4193ce3,Rite Aid,40.8292317,-73.8253411,3590 E Tremont Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,22
+New York,Castle Hill,40.819014376988314,-73.84802729582735,0,This spot is popular,4c7af4b0a8683704ba64154d,Franks Original Pizza Italia,40.82286427195636,-73.84890931755929,768 Castle Hill Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,22
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4be7f0b988ed2d7f0038cb1d,New Morris Deli,40.84652921587026,-73.86387374550078,744 Morris Park Ave (Holland Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,21
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4dc4ca87d4c0ad9c0f786b0c,The Pour House of Bay Ridge,40.62851661943293,-74.0289634772342,7901 3rd Ave,4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,21
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4e20d96152b1f82ffb98c3a5,E. Mosholu Parkway South and Bainbridge Ave,40.87224819764808,-73.88228625969055,"New York, NY",4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,21
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4e732dff45dd41e9ccce1987,Giacomo's Wood Fired Pizza & Trattoria,40.62853486510589,-74.02905124266296,7902 3rd Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,21
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4ba50da6f964a52046d638e3,Katonah Pizza and Pasta,40.89878411126604,-73.86745706580207,4307 Katonah Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,20
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4c9518076b35a143d5dc21dc,Fratelli's,40.86301897888721,-73.84360740712835,2507 Eastchester Rd,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,20
+New York,Riverdale,40.890834493891305,-73.9125854610857,0,This spot is popular,4bd784e2885595217acd87a7,Seton Park,40.88791393116787,-73.91611321473175,Independence at W 235th,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,20
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,56eeeb16498e8f651b540d2c,Prince Coffee House,40.85358840710895,-73.88912213488182,Arthur Ave,4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,20
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4b3a2cecf964a520e56125e3,Dunkin' Donuts,40.90648889386271,-73.90459183222455,508 259th St (Riverdale Ave and 259th St) (Riverdale Ave),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,20
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,5660c06b498e4003dba169a5,Mon Amour Coffee & Wine,40.88500863418534,-73.90033222698838,234 W 238th St (nr Broadway),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,20
+New York,Soundview,40.821012197914015,-73.86574609554924,0,This spot is popular,4b8be8c3f964a520d3b132e3,Rite Aid,40.8230921,-73.8687359,925 Soundview Ave (at Story Ave.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,20
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4d03e616347da1cd746a288f,Dunkin' Donuts,40.83556377907396,-73.9209095165658,46 E 167th St,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,19
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4b5cb0eef964a520af3e29e3,Dunkin Donuts,40.846354902157955,-73.83171861741273,1752 Crosby Ave (btw Buhre Ave and Roberts Ave),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,19
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4bf56dceff90c9b6065c5628,24 Hour Fitness,40.86259253376029,-73.89723268856744,2503 Grand Concourse (at Fordham Rd),4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,19
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,5089d4f7e4b0b2a614e157c5,A.L.C. Italian Grocery,40.62305051681447,-74.03122367666245,8613 3rd Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,19
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4d03e616347da1cd746a288f,Dunkin' Donuts,40.83556377907396,-73.9209095165658,46 E 167th St,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,19
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4b1712a8f964a520dbc123e3,Jolly Tinker,40.86745127461597,-73.88353583600046,387 Bedford Park Blvd (Webster Ave),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,18
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4ce56d672b4e721e46b8342b,Nona's Pizza,40.910155696805184,-73.90302574970092,6100 Riverdale Ave (W 261 St),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,18
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4ba61afcf964a520f03339e3,Dunkin Donuts,40.8494283281673,-73.85320002739451,1090 Morris Park Ave (Haight Avenue),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,18
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4ce81d330f196dcb5d2b43ae,Picante Picante Mexican Restaurant,40.878252,-73.902936,156 W 231st St,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,18
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bc33005abf49521fe5cc393,Joes Italian Deli,40.85439129501429,-73.8853668865723,685 E 187th St (Cambreleng Ave.),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,17
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4bb626e0f562ef3b2fb32f97,Sal's Pizzeria,40.875269350530566,-73.87956260705728,3167 Bainbridge Ave (E 205th St),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,17
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4a5beec3f964a52006bc1fe3,86 Noodles,40.622572519884045,-74.02842260569763,8608 4th Ave (86th St.),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,17
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4be84be4e1b39521dc3321c1,M&R Deli,40.85097826099314,-73.84833686299714,1200 Morris Park Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,17
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,53ff939c498e6b601dfa3979,San Gennaro Ristorante,40.854039238708886,-73.8888600546815,2329 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,17
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4a73a072f964a520fbdc1fe3,Omiya,40.622329157515146,-74.02857550374559,8618 4th Ave (Betw. 86th & 87th St.),4bf58dd8d48988d1d2941735,Sushi Restaurant,https://ss3.4sqi.net/img/categories_v2/food/sushi_.png,17
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4d4456d93616b60c953fe3c2,Tosca Marquee,40.81922225798978,-73.81760066505247,4034 E Tremont Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,16
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,4c5c35e32815c9280657b167,Cross Bronx Pizzeria,40.83006887037155,-73.85081764105371,2170 Cross Bronx Expy (at Castle Hill Ave.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,16
+New York,Throgs Neck,40.81510925804005,-73.81635002158441,0,This spot is popular,4d4456d93616b60c953fe3c2,Tosca Marquee,40.81922225798978,-73.81760066505247,4034 E Tremont Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,16
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,511edb6de4b0d58346fd272d,Patrizia's Of Woodlawn,40.900638399332884,-73.86772361835486,4358 Katonah Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,16
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4b86e7d7f964a5201ea531e3,Sorrento Pizzeria,40.85438866680259,-73.85451988387852,2004 Williamsbridge Rd (at Neill ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,16
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4ad62c95f964a5208d0521e3,Zio Toto,40.62479085034183,-74.03055087900958,8407 3rd Ave (btwn 84th & 85th St),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,16
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4bf329ef2d62952165ec5f58,Best Italian Pizza,40.86247494823356,-73.89689810209401,202 E Fordham Rd (Grand Concourse),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,15
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,58ec6b4001f0777e49e4d2a5,iLoveKickboxing - Bronx,40.85284559999999,-73.8279529,2007 Colonial Avenue,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,15
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4debd81822713dd973b85876,Sugarboy Bakery Cafe,40.87783170338122,-73.90266884096424,3069 Bailey Ave (231st St),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,15
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4e4cf8c3bd413c4cc66da683,Captain's Pizzeria & Restaurant,40.848876976000696,-73.85437663865966,1056 Morris Park Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,15
+New York,Eastchester,40.887555677350775,-73.82780644716412,0,This spot is popular,4c632f1cde1b2d7fed31e470,Mario's Pizza,40.88862762439113,-73.83126012557018,3824 Dyre Ave (East 233 Street),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,15
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4baa9c97f964a52088793ae3,Tokyo House,40.90567203906053,-73.90430870547758,5648 Riverdale Ave,4bf58dd8d48988d1d2941735,Sushi Restaurant,https://ss3.4sqi.net/img/categories_v2/food/sushi_.png,15
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4e5ec707e4cdfc603ee072d3,Walgreens,40.85074487905625,-73.85131001472467,1820 Williamsbridge Rd,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,15
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4c743793b474a1cd3bf5b5bf,La Casa Del Caffe,40.84867491944407,-73.85497310878064,1036 Morris Park Ave (at Hone Ave),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,15
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4d9cc174baae548104a4e264,Legendary Bar and Restaurant,40.83086249247355,-73.82638588514928,3513 E Tremont Ave,4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,15
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4b5b887ef964a5203f0529e3,Rite Aid,40.807253,-73.91778,537-539 E 138th St (Saint Ann's Ave),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,15
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,53bf0f0b498e192333913ab2,Pizza Studio - Fordham,40.86074889186513,-73.88981540589373,444 E Fordham Rd (Third Avenue),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,15
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4b6f0a6cf964a520e0d82ce3,Marconi Pizzeria,40.880766406357665,-73.87780801932352,181 E Gun Hill Rd (btw Bainbridge & Wayne),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,15
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,4c3a25e33849c928ff79c2b1,Western Beef,40.8249042352387,-73.89995318435037,1041 Prospect Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,15
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,4b4429abf964a52037f225e3,Arturo's,40.87441177110231,-73.91027100981574,5198 Broadway (at 225th St.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,15
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b70d8dff964a52063312de3,Tuscany Grill,40.62291326029698,-74.03138652017468,8620 3rd Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,15
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4f949937e4b0eba952ac93e4,Best Deli & Grocery,40.85955036756025,-73.88717333450916,563 E Fordham Road,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,14
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,4d39a9bacc48224b57ae354f,North Star Cafe,40.84333558876738,-73.88698194733944,850 E Tremont Ave (Corner of Marmion),4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,14
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4bc20b8d2a89ef3b6f1af388,Villa Barone Ristorante,40.853225226780154,-73.82730476570323,3289 Westchester Ave (Burr Ave),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,14
+New York,Spuyten Duyvil,40.88139497727086,-73.91719048210393,0,This spot is popular,4c58d06dec2520a1e4bf4d12,Henry Hudson Memorial Park,40.88162849801547,-73.918613319528,Kappock St + Palisade Ave (Independence Ave),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,14
+New York,Soundview,40.821012197914015,-73.86574609554924,0,This spot is popular,4c6f1cbed97fa1436922f2ca,Western Beef,40.82186623318325,-73.86748823969909,831 Rosedale Ave.,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,14
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,5796884c498eef49acc7f06e,Lobo Loco,40.62356257001225,-74.03104678221119,3rd ave (86th street),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,14
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4a47aecff964a520f2a91fe3,Mugz,40.857309011647914,-73.88597845458973,2476 Arthur Ave (at 189th St),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,14
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c9b9e7b9c663704b90463fd,Gerbasi Ristorante,40.85533418683699,-73.88780782046945,2384 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,14
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4bb62b326edc76b05d80301c,Liberty Donut & Coffee Shop,40.85533922011825,-73.85533281832504,2059 Williamsbridge Rd (at Lydig Ave),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,14
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4c2d2cfee116e21e7a308e60,Doyle's Pub,40.84846317892645,-73.855371226226,1024 Morris Park Ave,4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,13
+New York,Wakefield,40.89470517661,-73.84720052054902,0,This spot is popular,4c783cef3badb1f7e4244b54,Carvel Ice Cream,40.890486685759605,-73.84856772568665,1006 E 233rd St,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,13
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4b82cb1ff964a52064e530e3,Walgreens,40.86138745491638,-73.8913768529892,406 E Fordham Rd,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,13
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4c83e5cfd4e237047b037588,CVS/pharmacy,40.852422067925474,-73.82724053586031,3278 Westchester Ave.,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,13
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4b67925df964a520ba552be3,Captain's Pizza,40.84887580417101,-73.85437462135108,1056 Morris Park Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,13
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4a7e205ef964a52012f11fe3,Sofia Restorante Italiano,40.62484745920055,-74.03052232818622,8406 3rd Ave (Betw. 84th & 85th St.),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,13
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,529ea69511d2cbb2c4d6e9de,Evo cocktail lounge & restaurant,40.83437735604243,-73.85359914318475,1306 Unionport Rd (Btwn westchester ave & Odell st),4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,13
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4c1c4501b9f876b005c37b46,Mr. McGoo's,40.87941944187052,-73.90424277141844,5602 Broadway (at Naples Terrace),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,13
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4c78a45597028cfa05b6d8fe,Tommy's Pizzeria,40.81957293563141,-73.81748174041417,4033 E Tremont Ave (at Gerber Pl),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,13
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c823993d8086dcbc8207452,Terranova Bakery,40.8542927142093,-73.88513190462093,691 E 187th St,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,13
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,5149a98be4b0a74cda2c37ea,Dunkin' Donuts,40.819873349099964,-73.90149166510012,839 Prospect Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,12
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,4d362354eba454816b5f04f5,Rite Aid,40.81958634904598,-73.90115350484854,840 Westchester Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,12
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b97fc62f964a5202a2435e3,Tony & Tina's Pizza,40.857431933012315,-73.88602914297164,2483 Arthur Ave (189th),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,12
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bc67f1104e8b713a833362d,Ann & Tony's - An Original Arthur Avenue Restaurant,40.855704465427415,-73.88744918407676,2407 Arthur Ave (at E.187th Street),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,12
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4bad4cebf964a520b8433be3,Mexico Magico Restaurant,40.84665466644338,-73.83207247777908,1761 Crosby Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,12
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4b82c608f964a52001e430e3,Morris Park Pizza,40.844961992094355,-73.867605559151,656 Morris Park Ave (at Unionport Rd.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,12
+New York,Wakefield,40.89470517661,-73.84720052054902,0,This spot is popular,4d6af9426107f04dedeb297a,Rite Aid,40.8965207,-73.8446798,4232 Baychester Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,12
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4dd0582622718eed7a67df6c,Uncle Louie G's,40.62278367167344,-74.03141415087794,8702 3rd Ave (87th Street),4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,12
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4cab0bf1d971b1f7873327e1,S & S Cheesecake,40.88479273266669,-73.89986081581755,222 W 238th St (Broadway),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,12
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4b71f655f964a520ee662de3,CVS/Pharmacy,40.87919926745489,-73.87437919121662,310 E Gun Hill Rd (Perry Ave.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,12
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4be72770910020a16f1ad514,Broadway Pizza & Pasta,40.87882247136464,-73.90449402840686,192 W 231st St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,12
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,50ccb177e4b00957ca13bdd0,Gold Mine Cafe,40.87891576866267,-73.90469763627074,5578 Broadway (231st Street),4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,12
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4d9a37d4d97ba1430a07346b,Loeser's Delicatessen,40.879241887611094,-73.9054706858219,214 W 231st St,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,12
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4f1c35c2e4b0a62719d21f15,Harp Bar Brooklyn,40.62978871192184,-74.02853333491446,7710 3rd Ave (btwn 77th St & 78th St),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,12
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4bb6a9da2f70c9b645d58530,S&J Deli,40.84649548725435,-73.84834191938154,1572 Williamsbridge Rd,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,11
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4c17d1f2834e2d7f28f32780,Dunkin Donuts,40.853816523257144,-73.90872387848046,26 Burnside Ave (Davidson Avenue),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,11
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c8d35f75e048cfa79bbd3cd,Rite Aid,40.852893,-73.889431,592 E 183rd St,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,11
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4c6d5ce5e6b7b1f7af76a98e,Nicky's Coffee Shop,40.874932786273384,-73.87940404957489,3140 Bainbridge Ave (at E 206th St.),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,11
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4dfd3a33aeb7594e86230769,Little China City,40.86181086375809,-73.89204620822946,371 E Fordham Rd,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,11
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,50ee1ad5e4b06ee970fa53e1,Tasty Picks,40.88166538639227,-73.8794837670074,89 E Gun Hill Rd (Rochambeau Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,11
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4bb8bd247421a593fd09c240,Dunkin Donuts,40.82640674058172,-73.8221129486098,3732 E Tremont Ave (Randall Av & Dill Pl),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,11
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4e623531d164ddd5e5a833cc,Dunkin Donuts,40.85850382691519,-73.88490370044418,601 E Fordham Rd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,11
+New York,West Farms,40.83947505672653,-73.87774474910545,0,This spot is popular,4b006a75f964a520f43d22e3,River Park,40.84306197093502,-73.87752023628035,1040 East 180th St (Boston Rd),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,10
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4d307513a241f04d35a7b427,CTown Supermarkets,40.854081138502025,-73.88566344566232,668 Crescent Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,10
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4e011a3a45dd1e4999dceb4e,Duane Reade,40.82388130851618,-73.90920281410223,3225 3rd Ave (at E 163rd St.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,10
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4c6015cc23e303bb7cdc7407,Walgreens,40.86296361176342,-73.84306289255619,2504 Eastchester Rd,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,10
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4bbf3ae8f353d13a5f397e10,Joseph Scaglione Bakery,40.849240623263306,-73.85361329249675,1078 Morris Park Ave (Lurting Avenue),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,10
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4b85b6b3f964a5209b6e31e3,Giovanni's Italian Restaurant,40.85178560311938,-73.82978599125016,3209 Westchester Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,10
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bacf0b4f964a5200b1c3be3,Modern Market,40.85524546284461,-73.88785881084709,2385 Arthur Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,10
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,566f33e7498e44c2501bda81,Panda Express,40.86300094671129,-73.9008939678601,1 W Fordham Rd (Jerome Ave),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,10
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4c45c922f97fbe9a9e02bd30,Kiraku Hibachi & Sushi,40.853356006929786,-73.85362862246855,1948 Williamsbridge Rd (At Neill Ave),4bf58dd8d48988d1d2941735,Sushi Restaurant,https://ss3.4sqi.net/img/categories_v2/food/sushi_.png,10
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4b89996df964a520124532e3,Rite Aid,40.628702351574724,-74.0286174416542,7821 3rd Ave (at 79th St),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,10
+New York,Wakefield,40.89470517661,-73.84720052054902,0,This spot is popular,4c25c212f1272d7f836385c5,Dunkin Donuts,40.890631142128605,-73.84902685192144,980 E 233rd St (Paulding Ave),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,10
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4ba174d5f964a52094b837e3,Carlos & Gabby's - Riverdale,40.906566049541226,-73.90439723485366,5685 Riverdale Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,9
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4b3bdd2cf964a520f57c25e3,Madison's,40.90648305752465,-73.90396530525271,5686 Riverdale Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,9
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4c12f09877cea5934c12ce60,Bicentennial Veterans Memorial park,40.82424235914897,-73.81420155901135,Throggs Neck Expressway (Weir Creek),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,9
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4b60b0f2f964a52044f429e3,Addeo's Riverdale Pizzeria,40.90575686550095,-73.9042416969571,5654 Riverdale Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,9
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4c6c03e8a437224b651f29b1,Dunkin Donuts,40.862187653777575,-73.8940184465337,327 E Fordham Rd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,9
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,4b9ecad3f964a520420237e3,Top Banana,40.82675617923105,-73.84986723524874,New York,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,9
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,534ff298498e356511f1c56b,Dunkin Donuts,40.81987229832688,-73.91330098651187,3029 Third Avenue (155th Street),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,9
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4bfd7279bf6576b03b4badb8,Dunkin Donuts,40.8623254989006,-73.84343138794017,2451 Eastchester Rd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,9
+New York,Williamsbridge,40.88103887819211,-73.85744642974207,0,This spot is popular,4e33512f227111ae768d89f2,Cue Lounge,40.884163389332585,-73.8564844261784,1107 E Gun Hill Rd,4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,9
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4bdd99abf4a9a5938baa308b,Dunkin Donuts,40.84272162490788,-73.8455279331801,2702 E Tremont Ave (St. Raymond Ave.),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,9
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,4d7d3b4bf260a093e0d148ba,Pizza Italia,40.845755294917865,-73.88392107699579,842 E 180th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,9
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,51d8a6428bbdc567c9a2442b,Nonno's Pizza,40.62164967557811,-74.03185368050534,8816 3rd Ave (Btwn 88th and 89th Street),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,9
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,5314b30a498e3f88ce9cdc51,Dunkin' Donuts,40.86272067702812,-73.90079618792434,4 E Fordham Rd (Jerome Avenue),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,9
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,58ddb2e4a4367c31f23f23b5,Clinton Hall,40.857304458110725,-73.8858122629058,601 E 189th St,4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,9
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4c981f9cf419a093f4716d88,Bedford Park Gourmet Deli,40.86800966320367,-73.8842049508711,379 Bedford Park Blvd (at Decatur Ave.),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,9
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4c6eea19fa49a1cd1c63a1e3,Golden Pizza,40.80759560775795,-73.91931837081113,504 E 138th St (at Brook Ave.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,9
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,519432c7498eae4af99449fd,Inaka,40.625140559775616,-74.03041782134507,"Brooklyn, NY",4bf58dd8d48988d1d2941735,Sushi Restaurant,https://ss3.4sqi.net/img/categories_v2/food/sushi_.png,9
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4b47f069f964a5208c4426e3,Pasta Pasta,40.85478806485715,-73.85492881053774,2023 Williamsbridge Rd,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,8
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4bb0bd50f964a520cf583ce3,Dunkin' Donuts,40.8055654035267,-73.91108676152894,281 Bruckner Blvd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,8
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,58b1b3e6076be15eeba26a3f,The Miles Coffee Bar,40.819579,-73.817229,4039 E Tremont Ave,4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,8
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4b9d6b45f964a52078ab36e3,Mr. Q's Chinese Restaurant,40.85579022389548,-73.8554550059393,2115 Williamsbridge Rd,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,8
+New York,Morris Heights,40.84789792606271,-73.91967159119565,0,This spot is popular,4b9fa254f964a5204d3037e3,CTown Supermarkets,40.84921753311762,-73.91694343560889,1750 University Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,8
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4bc3abc4dce4eee11cb4719d,Best Western Gregory Hotel,40.62435700608523,-74.02735953514821,8315 4th Ave,4bf58dd8d48988d1fa931735,Hotel,https://ss3.4sqi.net/img/categories_v2/travel/hotel_.png,8
+New York,Baychester,40.866858107252696,-73.83579759808117,0,This spot is popular,4b8782bef964a52078c131e3,Dunkin Donuts,40.86348425076352,-73.83426274589857,1780 E Gun Hill Rd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,8
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4bd71c916798ef3b563a668d,My Place Family Pizza,40.86926155772971,-73.88947570131111,240 E 198th St (Briggs Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,8
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4b48cef8f964a520f55726e3,Venezia Pizzeria,40.85981175200528,-73.85522374820728,1115 Astor Ave (Yates Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,8
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4d687ef46297721e8fcabcb5,Legacy Bar,40.84178312211722,-73.84340328012033,53 Westchester Sq (Ponton Ave),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,8
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4b8d1887f964a520aae732e3,Noni's Coffee Shop,40.90735450795435,-73.90416054486849,5921 Riverdale Ave (West 259th Street),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,8
+New York,Castle Hill,40.819014376988314,-73.84802729582735,0,This spot is popular,4b70a191f964a52054262de3,Rite Aid,40.8198632,-73.8476912,650 Castle Hill Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,8
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b140a90f964a520489c23e3,Bellini's Pizza,40.8570710822463,-73.88535048830875,625 E 189th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,8
+New York,Port Morris,40.801663627756206,-73.91322139386135,0,This spot is popular,4bb0bd50f964a520cf583ce3,Dunkin' Donuts,40.8055654035267,-73.91108676152894,281 Bruckner Blvd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,8
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4b5f31daf964a52073ac29e3,Dino's Pizzeria,40.90517102933955,-73.90147193175798,5660 Mosholu Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,8
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4cb720e464998cfadbc71aa2,Dunkin' Donuts,40.895991844261026,-73.86360081367066,4201 Webster Ave Mobil (233rd St),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,8
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,517355dfe4b010ebcf2585d5,The Local,40.87855275865213,-73.90346176628925,171 W 231st St,4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,8
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,5591837d498ee4167d48bb73,Cinco de Mayo,40.82259951904216,-73.91158613747953,837 Washington Ave (Third Ave.),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,8
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4c2e2ce63a4d0f47a81de586,Food Universe Marketplace,40.87673987981054,-73.82898048976519,111 Dreiser Loop,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,7
+New York,Clason Point,40.80655112003589,-73.85414416189266,0,This spot is popular,4c3b27a1def90f47946ffd2d,Clason Point park,40.80601244585228,-73.84957637783666,"Bronx, NY",4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,7
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,4b6f7528f964a5205ff12ce3,The Snug,40.84719881133644,-73.78646581041706,302 City Island Ave,4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,7
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4c9eb295ca44236a2aac2d99,Jerry's Pizza,40.83587881991851,-73.8556310850081,2094 Starling Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,7
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,4e849ef577c8d65b90709b8b,Giovani's Big Pizza,40.81970573131934,-73.90166616609164,839A Prospect Ave (Westchester Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,7
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4c9e1ef2542b224b70a3f09f,Lucca Italian Restaurant,40.8476450600838,-73.83161547209276,3019 Westchester Ave (Hobart Ave),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,7
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,4bc3300674a9a5931826d4f6,Amor Bakery,40.822081,-73.900749,163rd street (Prospect avenue),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,7
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4e4cf8eebd413c4cc66da7f7,Primavera Pizzeria & Restaurant,40.84576058179042,-73.86384770279791,761 Morris Park Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,7
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4bfd74ce55539c74a1abbcf3,Duane Reade,40.8621013,-73.8999962,58 E Fordham Rd (at Morris Ave.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,7
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,5355d8b3498ec8ac10c2e180,Rams Deli Plus,40.85872803991178,-73.88578019511368,574 E Fordham Rd (Hoffman St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,7
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c79d294278eb713f6a05580,Cafe al Mercato,40.85417649340613,-73.88808455700543,2344 Arthur Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,7
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4c348cea213c2d7ff79e385d,Morris Park Bake Shop,40.84831126620576,-73.85589794483205,1007 Morris Park Ave,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,6
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4c2e5b02452620a16db21b0f,Luciano's Pizza,40.84826855223357,-73.85599987451863,1005 Morris Park Ave (Paulding Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,6
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4bafc2f1f964a520a31e3ce3,Anthony's Pizza,40.84526932730098,-73.86609972700784,686 Morris Park Ave (White Plains Road),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,6
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,4c27a574c11dc9b634f32a24,Filomena's Pizza & Pasta,40.846745636130926,-73.78618942327299,286 City Island Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,6
+New York,Riverdale,40.890834493891305,-73.9125854610857,0,This spot is popular,4e5d1a53b0fbc0acda3c5b8a,Bell Tower Park,40.88917798960079,-73.90833081276627,239th St Henry Hudson Pkwy,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,6
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4ca7331444a8224b41800a40,Dunkin Donuts,40.85400227259265,-73.89102289613224,4521 3rd Ave (183rd St),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,6
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4c816d75e602b1f78acb927a,V.I.P.'S Cafe,40.88156582814303,-73.87929923711168,131 E Gun Hill Rd,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,6
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4b6cabdaf964a520fe4a2ce3,CVS/Pharmacy,40.87449900511392,-73.87951536062447,3125 Bainbridge Ave (E 206th St.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,6
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4cb0d382ef1b370419643e00,David Greco's Arthur Avenue Trattoria,40.854031511759736,-73.88887832314941,"Bronx, NY 10458",4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,6
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4b89b62df964a520ff4c32e3,Sabor Latino Seafood Restaurant,40.83636550185743,-73.85303360278897,2161 Starling Ave (at Purdy St),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,6
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4b79d41ef964a520b9142fe3,Behan's Pub,40.89858450390552,-73.86750725480708,4299 Katonah Ave (at E 237th St),4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,6
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4bc64e0db387d13abcafc1e8,Walgreens,40.8415179,-73.842996,55 Westchester Sq,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,6
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,57538a1338fad91fb170f6e2,Havana Cafe,40.833189,-73.851313,"New York, NY 10462",4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,6
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,502bd9a6e4b0bea49203e0aa,Little Caesars Pizza,40.88000167064909,-73.90413957385358,5625 Broadway,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,6
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4c5f0c052815c9286d34b967,M & R Pizza,40.88057929014473,-73.8832210222942,7 E 208th St (Jerome Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,6
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4c1d717b8b3aa59363a99a5f,Spoto's Italian Restaurant,40.82039946759965,-73.8177024901674,4005 E Tremont Ave (Sampson Ave),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,6
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4b57443af964a5203e2e28e3,Sean's Quality Deli,40.89759465832248,-73.8671505768548,4273 Katonah Ave (at E 235th St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,6
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4b491198f964a5208f6426e3,Rino's Italian Restaurant,40.82123091031154,-73.81874315720901,3938 E Tremont Ave (btwn Dewey & Sampson Ave.),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,6
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4e2e08021838f1c552b6b8eb,Choi Yuan - Chinese Restaurant,40.873077802879685,-73.88908621196552,4 Bedford Park Blvd E,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,6
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4e4d0389bd413c4cc66dfd84,Las Maravillas De Mexico,40.87313535316203,-73.88901886539281,299 Bedford Park Blvd W,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,6
+New York,Eastchester,40.887555677350775,-73.82780644716412,0,This spot is popular,4e97d1ba4fc674719a2464ff,Dyre Deli Grocery,40.88823525219036,-73.8312823268945,3805 Dyre Ave (Light St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,6
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4bfd8d06f61dc9b669309fde,Tiny's Pizza & Pasta,40.8309295822695,-73.91662582679406,1113 Grant Ave,4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,6
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,53e7c937498e569365e0288e,Dunkin Donuts,40.84425732001211,-73.88802256052271,770 E Tremont Ave (Prospect Avenue),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,6
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,5553702c498ecb85f99d8f37,XIN,40.62508203621133,-74.0304936920825,8320 3rd Ave,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,6
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4bab9998f964a520c8b73ae3,OK Mr. Pancho,40.86712,-73.88353101,2871 Webster Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,6
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4e7bca12183811c1da2694f2,Taqueria Lupita,40.829202506332805,-73.8268924774988,3550 E Tremont Ave (Off Lafayette Ave),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,5
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4af060a7f964a52086db21e3,Cold Cut City,40.8791735908651,-73.90575340287347,228 W 231st St,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,5
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4bdc88c92a3a0f47144ab3b6,Carvel Ice Cream,40.883657145742866,-73.90165452034793,5759 Broadway,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,5
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,55f6ce59498e2feb32cb7da3,CVS/Pharmacy,40.83530662693773,-73.92072176482903,150 E 167 St,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,5
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4c72e57c8efc37046b30147d,Bartow Pizza,40.87002859702255,-73.82892288179492,2051 Bartow Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Throgs Neck,40.81510925804005,-73.81635002158441,0,This spot is popular,4bc602cdf360ef3b79fada2d,S & W Deli,40.81948470960523,-73.81758001179004,4030 E Tremont Ave (Miles Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,5
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4d3244caeefa8cfa58ee34b3,Rite Aid,40.835491,-73.928256,1091 Ogden Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,5
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4b8c6d1bf964a5203dd032e3,Ljubo's Pizza,40.84024251376612,-73.84335520763584,15 Westchester Sq (Benson Street),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,West Farms,40.83947505672653,-73.87774474910545,0,This spot is popular,4e4e3e6cbd4101d0d7a5ca87,Alitalia Pizzeria Restaurant,40.840023326199095,-73.87585497185644,1138 E Tremont Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4e4dd9afbd4101d0d79cbd5c,Cestra's Pizza,40.828585315724325,-73.82422530166828,3617 E Tremont Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4e4d0387bd413c4cc66dfd72,Hung Hing Chinese Restaurant,40.871181206606806,-73.88675855253665,239 Bedford Park Blvd,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,5
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4bc602cdf360ef3b79fada2d,S & W Deli,40.81948470960523,-73.81758001179004,4030 E Tremont Ave (Miles Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,5
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,55f6ce59498e2feb32cb7da3,CVS/Pharmacy,40.83530662693773,-73.92072176482903,150 E 167 St,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,5
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4d03ef588620224bff0ba640,Catania's Pizzeria & Cafe Inc.,40.85363375882053,-73.88933672847328,2305 Arthur Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,5792658f498e58862a1ffe18,Dunkin' Donuts,40.85638,-73.85609,2141 Williamsbridge Rd (Pelham Parkway South),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,5
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4c1bf416b9f876b009207b46,Rite Aid,40.8157086,-73.909019,642 Westchester Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,5
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b4f66c7f964a520f50427e3,SUBWAY,40.86065708075232,-73.88945320961489,460 E Fordham Rd (3rd Ave.),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,5
+New York,Longwood,40.81509904545822,-73.8957882009446,0,This spot is popular,50426887e4b00fd08f1b8266,C-Town Supermarkets,40.8168127,-73.8958085,809 Southern Blvd,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,5
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b180daaf964a52024cc23e3,University Pizza & Restaurant,40.85870680479297,-73.88585753180512,574 E Fordham Rd,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4afac66af964a520a11822e3,Jerome's Pizza,40.87310727496674,-73.88904984641387,21 Bedford Park Blvd E (Jerome Ave.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,5256165411d2349efb5f4fe4,Pizza Hut,40.833836654425596,-73.85701797438742,2019 Westchester Avenue,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4e74ebead1643f93b1b05d2c,Queen of Tacos,40.88024598094388,-73.88368544309385,9 E Mosholu Pkwy N (Jerome Avenue),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,5
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4c8d09c6509e37041b923855,Battaglia's Market,40.8664953032421,-73.84254765611496,2503 Eastchester Rd (Mace Ave),4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,5
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4c3be4c3980320a10e0a8ae4,Casa Doro,40.86267352762037,-73.84357086709907,"Bronx, NY 10469",4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,5
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4c6888585fae20a120f449a6,Domino's Pizza,40.83384091755234,-73.85686178507058,2025-2027 Westchester Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Baychester,40.866858107252696,-73.83579759808117,0,This spot is popular,4ba2bf47f964a520db1538e3,Pizza Hut,40.86868776810615,-73.83384615182877,2829 Edson Avenue,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,5
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4ba3b304f964a520d15538e3,Rite Aid,40.8620336,-73.8427679,2426-34 Eastchester Rd (at Waring Ave.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,4
+New York,Riverdale,40.890834493891305,-73.9125854610857,0,This spot is popular,53be952c498ea15ad3fe0efc,Whitehall Health Club,40.88677542573004,-73.91181905700154,3333 Henry Hudson Pkwy,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,4
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4ca4fda4d971b1f77da5f2e0,Golden Phoenix Chinese Restaurant,40.90568876262962,-73.90429772559949,5646 Riverdale Ave (West 258th Street),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,4
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,576c833e498e85d8ecf0fff2,Luna Cafe,40.855605,-73.887352,"New York, NY 10458",4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,4
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4b5f3d97f964a52074af29e3,Lee Xing,40.85164023136602,-73.82979925838885,3207 Westchester Ave,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,4
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4bfe9780f61dc9b690a7a0de,Rite Aid,40.8537086,-73.9058889,57 E Burnside Ave (180 Walton),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,4
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4c9bb31e9975a1438f922bcf,Marinells Bakery,40.83336858139031,-73.91445285669495,264 E 167th St (btwn Morris & Grant Ave.),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,4
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,4cd6c6f889eb6dcb4943311e,Dunkin Donuts,40.825045138903945,-73.89985117917449,1041 Prospect Ave (at E 165th St.),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,4
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,52af0dc711d21e1625464d63,Blink Fitness,40.859481537820926,-73.89851990466835,"Bronx, NY",4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,4
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,4d41f0d0aed776eb49aa6997,Domino's Pizza,40.8419093,-73.8836407,921 E Tremont Ave Ste A,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,4
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,44941e38f964a52081341fe3,Arthur Avenue Cafe,40.85406831774407,-73.8888375888388,2329 Arthur Ave (Crescent Avenue),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,4
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,5145f54de4b0c11f7f74de13,SUBWAY,40.62243275137558,-74.03144380952618,8711 3rd Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,4
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4e31c18dd22dc6a91530bbc4,SUBWAY,40.87281809506911,-73.87831163680261,204th Street,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,4
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4f446de019836ed0019408da,Bridges,40.818821,-73.817347,4100 E Tremont Ave,4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,4
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,5153431be4b00546840700f1,Dolce Vita,40.855245,-73.887114,616 E 187th St (Hughes Ave),4bf58dd8d48988d110941735,Italian Restaurant,https://ss3.4sqi.net/img/categories_v2/food/italian_.png,4
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4b79c7c2f964a5209b112fe3,Angelica's Bakery,40.89918283532642,-73.867552759052,4315 Katonah Ave (at E 237th St),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,4
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4d2cfa5cad25224bbbc5fb8f,Capri II Pizza,40.87637420537464,-73.82994042507629,Dreiser Loop,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,4
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4e4dd5c1bd4101d0d79c5143,Dunkin Donuts,40.85919127478385,-73.89864952068201,2366 Grand Concourse,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,4
+New York,Clason Point,40.80655112003589,-73.85414416189266,0,This spot is popular,4c826ffd2f1c236ab42b3943,Harding Park,40.80924776029211,-73.85650815747184,"Bronx, NY 10473",4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,4
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4bf86b865ec320a1dec588d3,Franks Pizza & Restaurant,40.818721232539104,-73.81723942127738,4106 E Tremont Ave (Miles Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,4
+New York,Throgs Neck,40.81510925804005,-73.81635002158441,0,This spot is popular,4bf86b865ec320a1dec588d3,Franks Pizza & Restaurant,40.818721232539104,-73.81723942127738,4106 E Tremont Ave (Miles Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,4
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4bcf3b13caff952139bfccf0,SUBWAY,40.906114967645465,-73.90444195849047,5670 Riverdale Ave (at W 258th St),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,3
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4ba6c529f964a520a46e39e3,Ben's Pizzeria,40.62640416738638,-74.02975174836288,8125 3rd Ave (82nd St.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4c092a61ffb8c9b6f4656961,Riverdale Kosher Market,40.9067542156892,-73.90467988783982,5683 Riverdale Ave Apt 100 (259th St),4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,3
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,4c12a92ea1010f47c9454918,Carvel Ice Cream,40.83346149002003,-73.85127256809332,1250 Castle Hill Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,3
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,58d8e57b89151d3264781ee0,Dunkin Donuts,40.83408247377312,-73.85172634674849,1281 Castle Hill Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,3
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,4b643ec5f964a5202ca62ae3,El Valle Restaurant,40.8447402308582,-73.88973939863966,733 E Tremont Ave,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,3
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4dd0477a8877851244255244,SUBWAY,40.86702810635262,-73.88391701697157,2867 Webster Ave (Bedford park blvd),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,3
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,4e4ce4debd413c4cc66d05d0,SUBWAY,40.87849271667849,-73.90538547211088,5549 Broadway,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,3
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4d98f415744f3704825cfc57,Diego's Pizza,40.852625631939084,-73.9085885359017,1995 Jerome Ave (179 St),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4be0af77f92c20a16a34bad3,Fordham Pizza & Pasta,40.86167335510254,-73.89864,2450 Creston Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4a9892a0f964a520be2c20e3,Cappuccino Cafe,40.62951041286022,-74.02853892492205,7721 3rd Ave,4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,3
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,51748ddce4b01c0ba7cc5d01,Pizza Hut,40.81626590182113,-73.91073637087169,601 Westchester Ave (Eagle Dr),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,Morris Heights,40.84789792606271,-73.91967159119565,0,This spot is popular,4b855228f964a520865631e3,My Pizza,40.849670435102155,-73.91681699790597,1723 Dr Martin L King Jr Blvd (bwtn 176th St & Macombs Rd),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,4d5e9b061ee8721e02569421,Linda's Pizza Restaurant,40.844807,-73.889935,729 E Tremont Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4c5db38e6ebe2d7faca1d32e,Rocco's Pizza Restaurant,40.86753888560105,-73.8837287810681,397 Bedford Park Blvd (Webster Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4de66c9a7d8b53987c608d47,Subway,40.862498,-73.89397227,316 E Kingsbridge Rd,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,3
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4bff3cf9ca1920a1b598ec81,Nicky's Pizza & Ristorante,40.87337458632297,-73.88050846237203,280 E 204th St (at Bainbridge Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,3
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4c9efab02fb1a1436f05f040,East 205th St,40.87388231771641,-73.87641197566941,East 205th St,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,3
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,4b88e053f964a5208a1132e3,Rite Aid,40.875466574434704,-73.90890629016033,5237 Broadway (228th Street),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,3
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4c30c7517cc0c9b665d1ed9a,Fort Independence Park,40.88152213955193,-73.8969970359663,"Bronx, NY 10463",4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,3
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4c176b47216fc9b65b588f96,M&R Deli and Coffee Shop,40.84413974924561,-73.84572218421886,1480 Williamsbridge Rd,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,3
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4e4ce4debd413c4cc66d05d0,SUBWAY,40.87849271667849,-73.90538547211088,5549 Broadway,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,3
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4be2b79d660ec9284d04ca3b,Townhouse Restaurant,40.876085887834265,-73.82886815052547,129 Dreiser Loop,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,3
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4c9f6aed7c096dcbb71dded1,Rite Aid,40.8703448818904,-73.82830202579498,2063 Bartow Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,3
+New York,West Farms,40.83947505672653,-73.87774474910545,0,This spot is popular,4e7e537446901c590625f39f,Dippin Dots,40.84159269746876,-73.87954150374226,New York,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,3
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,54906e4b498e965f5f346ba5,Milano Italian Delicatessen,40.85657378113683,-73.85582475342396,2143 Williamsbridge Rd,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4e4cf8c4bd413c4cc66da68e,Patricia's I Brick Oven Pizza & Pasta,40.849121,-73.854675,1051 Morris Park Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,2
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4c3d0bacb169c9b6489a4668,Carvel Ice Cream,40.85513927086455,-73.85521660946328,2045 Williamsbridge Rd,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,2
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4edbe59b29c2b9122a3b736a,Little Caesars Pizza,40.80768677796418,-73.91964096621585,496 E 138th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,2
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c1d4ad6eac020a1850048c2,Compare Foods,40.860567162596894,-73.8912322890967,421 E 189th St (Park Ave),4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,2
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4d518c5ec5ff6ea8295da507,SUBWAY,40.85447023103968,-73.85484845781009,2009 Williamsbridge Rd,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,527fbaa011d2fc4f6ae959d2,Pizza Block,40.906344918017844,-73.90464305877686,5677 Riverdale Ave (btwn W 258th St & W 259th St),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,2
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4d9b7ad0cbc96ea840beec25,SUBWAY,40.860865007521355,-73.89796948060076,2432 Grand Concourse,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Spuyten Duyvil,40.88139497727086,-73.91719048210393,0,This spot is popular,4e276fe8149554c7742ffa89,Spuyten Duyvil Shorefront Park,40.878524995846526,-73.92165605652191,2300 Johnson Ave,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,2
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4dfe177dc65b31579b33c78a,Valencia Bakery,40.852499464991645,-73.90829062323233,1997 Jerome Ave (East 179th Street),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,2
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4e5f8bde45dd4656dd97be19,Au Bon Pain,40.858061919548035,-73.91203969692151,Bronx Community College Campus,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,2
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4bc8f646b6c49c74d8898d91,Great Wall Chinese Restaurant,40.85526714280669,-73.85518729036599,2049 Williamsbridge Rd,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,2
+New York,Clason Point,40.80655112003589,-73.85414416189266,0,This spot is popular,4d86466a5ad3a093e9f8f5fd,Harding Park/Water Front,40.805825750551904,-73.85786298398283,New York,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,2
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,56857d3f498ed509df7a7604,Dunkin Donuts,40.88419677234612,-73.90027251902718,193 W 237 Street,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,2
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,561d87ee498e0e9b3504c398,SUBWAY,40.82004529984566,-73.90167646132129,839D Prospect Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,533c67ba11d2d3b54a68bc74,Key Food,40.83346357122027,-73.91454341113266,256 E 167th St,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,2
+New York,Spuyten Duyvil,40.88139497727086,-73.91719048210393,0,This spot is popular,4bdc9e9b2a3a0f47d9abb3b6,Ben's Market Basket,40.878591047927394,-73.9174855636529,19 Knolls Cres,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,2
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,4e4e4517bd4101d0d7a67568,Baskin-Robbins,40.8769755336728,-73.90675193198494,5501 Broadway,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,2
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,538750dd498e2dcf83dfe3af,LA Fitness Offices,40.844056935345684,-73.83859529664026,1646 Eastchester Rd (Corner of Blondell Avenue),4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,2
+New York,Hunts Point,40.80972987938709,-73.88331505955291,0,This spot is popular,4ca3e96c5720b1f78d0936ef,Fratellis Pizza Cafe,40.809804094265985,-73.88076041395101,2507 Eastchester Rd (Food Center Dr),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,2
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4bc5f5b8b387d13a3307c1e8,SUBWAY,40.85260257988395,-73.82724907831455,3683 Bruckner Blvd (Pelham Bay Station),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4e735e13d22d2fd31441a86c,165 St and Nelson Ave,40.83430707833217,-73.92746582953727,165st (Nelson Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,525dfa1711d2fad79e1c0a91,1270 morris ave,40.83509102626026,-73.91311330809891,1270 Morris Ave (169th St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4c025889096ed13af9b37926,SUBWAY,40.83619241716062,-73.86020824313164,1448 East Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4b85a5c1f964a520c26a31e3,Rite Aid,40.8417973,-73.8444525,2748 E Tremont Ave (Frisby Ave.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,2
+New York,Soundview,40.821012197914015,-73.86574609554924,0,This spot is popular,4e656e8252b1260c14683b4b,Kee Hing Restaurant,40.822759676529074,-73.86780408028721,845 Soundview Ave (Story Ave.),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,2
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4bb946b253649c747eea47fb,Carvel Ice Cream,40.623094645120126,-74.03124488518532,8612 3rd Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,2
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4c61745bb6f3be9a41b16173,Rite Aid,40.81932247195744,-73.913134932518,3012 3rd Ave (E 155 St.),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,2
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4df4d9cf18386ecb4e353a3f,Pioneer Supermarket,40.807302645871495,-73.91702734573309,256 Saint Anns Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,2
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4e8a6ea2f5b97ad7c419faef,R&Z Gourmet Deli,40.84590026158979,-73.86275098043292,803 Morris Park Ave (Barnes Avenue),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,2
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4d3081e796fe6ea81ad31544,548 Gourmet Deli & Grocery,40.85395265100937,-73.8905317803788,548 E 183rd St (3rd Ave.),4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,2
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4e59adc6b993732579ed855f,The Northrose,40.823951484543606,-73.9101617567809,488 E 163rd St (3rd Ave),4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,2
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4c1d4ad6eac020a1850048c2,Compare Foods,40.860567162596894,-73.8912322890967,421 E 189th St (Park Ave),4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,2
+New York,Bay Ridge,40.625801065010656,-74.03062069353813,0,This spot is popular,4d4be373a79a6a3189e077a3,Cinnabon,40.623080404599214,-74.03116266238062,8612 3rd Ave (86th St),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,1
+New York,Hunts Point,40.80972987938709,-73.88331505955291,0,This spot is popular,4e6f7e0b52b1706317d9256a,the point cafe & grill,40.809757377602175,-73.88073013708618,402 Hunts Point Ave,4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,1
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4e1b6e612fb6a73574977167,Dunkin' Donuts,40.862403552769436,-73.8462511045104,1368 E Gun Hill Rd,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,1
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4d41f0c9aed776eb37a86997,Domino's Pizza,40.82687097197242,-73.8227927684784,3706 E Tremont Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4c44e3cbf97fbe9a45d8bb30,Pizza,40.861323826126785,-73.89146770539735,2519 Webster Ave (E. Fordham Rd),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,56996ed5498e61bdab4ffaf9,Elena's Restaurant,40.85199990502187,-73.90981207837609,5 W Tremont Ave (Jerome Ave),4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,1
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4d9a07842bd6f04d88f28b50,Subway,40.85388737046262,-73.90728484194736,2052 Jerome Ave (at Burnside Ave.),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4bfb2ac2f214a593adebae0e,Villa Maria Restaurant,40.86229977721087,-73.84322966910922,2440 Eastchester Rd,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4e4e297abd4101d0d7a3af5f,Halal Kitchen Chinese Restaurant,40.83373706857313,-73.85693887308938,2023 Westchester Ave,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,1
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4c48569589a6c9b6701a9d88,Rite Aid,40.8694755,-73.8893671,239 E 198th St,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,1
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,53b1d8ec498e8cd0833b77f0,Ambrosia Park,40.8441821465368,-73.78531806941565,"Bronx, NY",4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,1
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4f04fe3593adf931de42586b,Papa John's,40.884015199223136,-73.90308313780322,161 W 231st St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Clason Point,40.80655112003589,-73.85414416189266,0,This spot is popular,4da84054fa8c4175d0b46750,Shop Smart Food Mart Soundview Ave,40.80947620728788,-73.85456705405758,New York,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,1
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4cb5017a8db0a143e5935f16,Univerisity Pizza Burnside,40.854169230895295,-73.91247029035081,1955 Dr Martin L King Jr Blvd (W Burnside),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4e4e4516bd4101d0d7a6755d,Baskin-Robbins,40.83600632686291,-73.92088102426091,46 E 167th St,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,1
+New York,Schuylerville,40.82657951686922,-73.82620275994073,0,This spot is popular,4bd61112637ba593dc92f770,SUBWAY,40.826738890767,-73.82248089184402,3714 E Tremont Ave (Dill Pl.),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4e6a0941483bf2d9e6089db1,Subway Restaurants,40.83524726742855,-73.9208570761204,55 E 167th St (Between River And gerrard Avenue.),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4cb0f72d75ebb60cba60c9ad,Domino's Pizza,40.8603678,-73.8930969,2463 Webster Ave (188th Street),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4bc41a1fdce4eee166f0719d,Deegan Motel,40.8828,-73.89905,3600 Bailey Ave,4bf58dd8d48988d1fa931735,Hotel,https://ss3.4sqi.net/img/categories_v2/travel/hotel_.png,1
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4c166d917fd00f47c537fab6,Emerald Pharmacy,40.89952520236089,-73.86747101203787,4295 Katonah Ave (E236th St),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,1
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4f21c904e4b0831873dc6256,Tony & Cyndi's Pizzeria & Restaurants,40.88356615627457,-73.90180851709593,5761 (Broadway),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4e7bb89d45dd3b0e49be43ca,Leroy Pharmacy,40.868506347762704,-73.89004946144176,245 E 198th St,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,1
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4b4fbdb5f964a520811327e3,Domino's Pizza,40.88445523923306,-73.90217502412725,3611 Kingsbridge Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,52f543e211d242eeca9b3f21,Little Caesars Pizza,40.841101354000024,-73.84313827623544,65 Westchester Sq,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,5729282f498e40e19d17c220,Frank's Deli & Grocery,40.866103861481,-73.8858595490456,2777 Webster Ave (E. 198 Street),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4c6d5c5da437224b07c92cb1,SUBWAY,40.84100931649868,-73.84237661566786,74 Westchester Sq,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,4c805b1fdc018cfa6b33bc6c,Domino's Pizza,40.845313044183776,-73.8646388501092,738 Morris Park Ave (at Holland Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,4f320d9019833175d60bd324,Eat Well Bakery and Restaurant,40.839342,-73.852621,1658 Castle Hill Ave,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4c27c26d9fb5d13acd969857,Carvel,40.860209031792465,-73.89278832816836,2472 Webster Ave (189 St),4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,1
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4dc877f7887721632c638cf6,Van Cortlandt Deli,40.88517705947143,-73.89952611405425,240 W 238th St (at Broadway),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Longwood,40.81509904545822,-73.8957882009446,0,This spot is popular,4d895394bc848cfa2100c12b,SUBWAY,40.8171415767306,-73.89641337929257,1024 Longwood Ave (Southern Boulevard),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Olinville,40.87137078192371,-73.86332361652777,0,This spot is popular,4e4cf8fcbd413c4cc66da881,La Estrella Bar & Restaurant,40.871000854105546,-73.86534051038957,746 Burke Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4e38a2cfbd415d9f63d71132,Dunkin' Donuts,40.864126937079334,-73.89898939397328,2435 Grand Concourse,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4e3ee6dfd22d102e85555934,China City,40.85991353925768,-73.89475776206886,308 E 188th St,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,1
+New York,West Farms,40.83947505672653,-73.87774474910545,0,This spot is popular,50b93326e4b0c22ba91b79ac,Subway Restaurant,40.84089660644531,-73.87959289550781,2026 Boston Rd (Tremont Avenue),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4f997b55d4f21823bb1f521e,Baskin-Robbins,40.9066607952678,-73.90461037506772,508 259th St (Riverdale Ave and 259th St),4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,1
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4e881f1b2c5beb9bbe5211e0,RHZ DELI GROCERY,40.832512259985656,-73.91364669951923,E 167 Street (College Avenue),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4b7dc1fcf964a520c4d22fe3,Tri-Edys Deli,40.9000732477174,-73.86755140787392,4345 Katonah Ave,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Spuyten Duyvil,40.88139497727086,-73.91719048210393,0,This spot is popular,4c86a086de50952135af2583,Rite Aid,40.878349,-73.917611,21B Knolls Cres,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,1
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4e4c2b47d22d10a6c5c7ef1a,Las Chatas,40.853849543464456,-73.88949249642707,2355 Arthur Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,1
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4b75d64af964a5204e282ee3,Joseph's Pizza,40.87920220241614,-73.87439641829206,283 E. Gunhill Road (Perry Ave.),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4c75ad43d8948cfa217b68da,Bella Napoli 2,40.89672979186445,-73.86231986737155,234th street (Katonah Ave),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,West Farms,40.83947505672653,-73.87774474910545,0,This spot is popular,54d8e59d498e7fc097b3d164,Dunkin Donuts,40.84010119902915,-73.87664166750253,1111 E Tremont Ave,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,1
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,54f612e1498eefb548d1400b,C-Town Supermarkets,40.90532751109055,-73.90105595606687,5686 Mosholu Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,1
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4f75f6c6e4b0613b068eb235,Little Caesars Pizza,40.83583430715401,-73.92148382739764,15 E 167th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4f3248bb19836c91c7c88252,Zaros Bread Basket,40.803867,-73.920739,138 Bruckner Blvd,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,1
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4e41d2c4b61ca5ba3b1f9c6b,Ming Liang Kitchen,40.87999554,-73.87632362075638,236 E Gun Hill Rd (Kings College Place),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,1
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4df7be37aeb7f7c3b5436f7a,Little Caesars Pizza,40.82046613557278,-73.91291236528079,3044 3rd Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c2b89e28abca5932c570020,Cambreleng Cafe,40.85455726112875,-73.885094139665,2403 Cambreleng Ave,4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,1
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4cf00d9262ef6dcb5847025a,Xing hui linda,40.820322026792326,-73.81815921208477,4006 E Tremont Ave,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,1
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4c27c26d9fb5d13acd969857,Carvel,40.860209031792465,-73.89278832816836,2472 Webster Ave (189 St),4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,1
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4cba4a550180721ebb739961,Rose Flower Chinese,40.86767611484716,-73.88410650549298,383 Bedford Park Blvd (decatur avenue),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,1
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,5769027ccd106670100ea1af,Retro Fitness,40.836630570231634,-73.9222569149703,1231 Edward L Grant Hwy,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4d4ec779db1b37046d37111f,Jimbo's Hamburger Palace,40.86053495845375,-73.89807072998336,2419 Grand Concourse,4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,1
+New York,Port Morris,40.801663627756206,-73.91322139386135,0,This spot is popular,4ddaa9ccd1647fcf3e96c5c8,Walnut Bus Stop,40.8007622684826,-73.91065030896316,881 E 134th St,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,1
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4e99cd9961afc418b9717d7d,Little Caesar's,40.86210184805984,-73.89159096386756,2537 Decatur Ave (at Fordham Rd),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4e6a0941483bf2d9e6089db1,Subway Restaurants,40.83524726742855,-73.9208570761204,55 E 167th St (Between River And gerrard Avenue.),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,East Tremont,40.84269615786053,-73.88735617532338,0,This spot is popular,4f21e671d5fb5420c5d76616,Papa John's Pizza,40.84287241159307,-73.88621091842651,868 Tremont Ave (by Southern Boulevard),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,1
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,527d4059498e24e882aac66d,Woodlawn Deli,40.89690455351697,-73.86724130946774,4255 Katonah Ave (234th),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4e4e4516bd4101d0d7a6755d,Baskin-Robbins,40.83600632686291,-73.92088102426091,46 E 167th St,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,1
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4c3cc63e15cb1b8df4127bdc,SUBWAY,40.872585858388554,-73.8896375901331,2958 Jerome Ave (Bedford Park Blvd W),4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,1
+New York,Eastchester,40.887555677350775,-73.82780644716412,0,This spot is popular,4dd85362e4cd37c893c2e3e4,Sunshine Supermarket,40.888868844071744,-73.83128840402118,3830 Dyre Ave (E 233 St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4d2d1728762fa143051f7664,Dong King,40.834081100717626,-73.92711564063138,80 W 165th St,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,0
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4c854ffb51ada1cdbfa43610,The Coachman's Inn,40.90014654775011,-73.86764673430903,Katonah Ave,4bf58dd8d48988d116941735,Bar,https://ss3.4sqi.net/img/categories_v2/nightlife/pub_.png,0
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4e99bb48b8f77b7a994ff28e,Muskrat Cove,40.89661462254967,-73.86244620698331,New York,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,0
+New York,Woodlawn,40.89827261213805,-73.86731496814176,0,This spot is popular,4ae30ee2f964a520299021e3,The Corner Scone,40.89857753397948,-73.8620844160602,4279 Webster Ave (E 236th Street),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Norwood,40.87722415599446,-73.8793907395681,0,This spot is popular,4dd2d4bdc65b47384cea8008,Keyfood,40.87978511911963,-73.87953001932694,3413 (Jerome Ave),4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,0
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4e4cf9c1bd413c4cc66dae95,Cestra's Pizza,40.8238032058735,-73.90905996429954,3240 3rd Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,Unionport,40.82977429787161,-73.85053524451935,0,This spot is popular,4e4ce536bd413c4cc66d08b1,SUBWAY,40.82910956661606,-73.84638319761233,2708 E Tremont Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Wakefield,40.89470517661,-73.84720052054902,0,This spot is popular,4d33665fb6093704b80001e0,SUBWAY,40.89065631618457,-73.84919159087512,980 E 233rd St,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Spuyten Duyvil,40.88139497727086,-73.91719048210393,0,This spot is popular,4b93fa4df964a520805e34e3,Paul's Park,40.880814671288334,-73.91927463941367,Independence Ave. (Kappock St.),4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,0
+New York,Parkchester,40.837937822267286,-73.85600310535783,0,This spot is popular,5a046206a9fe1221192721cb,Gourmet Deli,40.836385,-73.852313,1500 Castle Hill Ave (Starling Ave),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4e4ce52bbd413c4cc66d0858,SUBWAY,40.83576473725378,-73.92139771277829,55 E 167th St,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Marble Hill,40.87655077879964,-73.91065965862981,0,This spot is popular,4ed7956b8b81b2bf28adc714,Terrace View Delicatessen,40.87647647652852,-73.91274586964578,135 Terrace View Ave.,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4e0d238622711665f6088cf7,Domino's Pizza,40.81982581801686,-73.91359559729159,3025 3rd Ave (Third Av),4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4bd8bbfbe914a5932f4854fa,Baskin Robbins,40.87004451117903,-73.8295779479274,2035 Bartow Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,0
+New York,Edenwald,40.88456130303732,-73.84808271877168,0,This spot is popular,51ebe5e3498ec8b5551ee9c3,CTown Supermarkets,40.88417855,-73.84919733,3970 Laconia Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,0
+New York,Van Nest,40.84360847124718,-73.8662991807561,0,This spot is popular,50b6558ce4b08f5b4680c631,Prmavera Pizza,40.84578608318194,-73.86394504799824,"Bronx, NY 10462",4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4c687d4c73851b8dede1ba39,Mi Favorita,40.86862002224549,-73.88222309628317,392 E 201st St,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4d0a529133d6b60cf4cf9985,Subway,40.877720351115315,-73.90537973066263,5209 Broadway,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Edenwald,40.88456130303732,-73.84808271877168,0,This spot is popular,5833382bb50d520d9920ef10,Laconia Deli & Grocery,40.883596,-73.849472,"Bronx, NY",4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4e17b69162e12640d86ee313,Deli & Grocery Store,40.838417453658316,-73.92579525055189,168th st (Nelson),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Co-op City,40.87429419303012,-73.82993910812398,0,This spot is popular,4e5b9537aeb7d78d9f923dd3,Capri Deli,40.87028541589309,-73.82860152242962,141 Dreiser Loop,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4df1566488772e1f814a853a,H & A Convenience Store,40.8838187633425,-73.89796163834738,3656 Bailey Avenue (238 Street),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Kingsbridge,40.88168737120521,-73.90281798724604,0,This spot is popular,4cdd78146ad1a09302a3f756,Kennedy Deli,40.880121129279615,-73.90705048496797,302 W 231st St,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4da0c70b7aee5481bda6b2fe,wah yong,40.838572843055395,-73.92469300500156,112 W 168th St (nelson ave),4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,0
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4b26938df964a520ca7d24e3,Subway,40.85388462593713,-73.89020449265843,2316 Arthur Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4bd6df656798ef3b27b9658d,Habibi Deli Grocery,40.85741275085686,-73.89029062105902,187th st (Hoffman),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4d41f0caaed776ebb2a86997,Domino's Pizza,40.83587284041261,-73.92099072040764,41 E 167th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,Belmont,40.85727710073895,-73.88845196134804,0,This spot is popular,4cacb05644a8224b5fb73540,Golden City,40.854018330574036,-73.88905942440033,2324 Arthur Ave,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,5b241d3f35d3fc002cea7780,Subs Gourmet Deli,40.834827,-73.928128,1070 Ogden Ave (W 165 St),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Westchester Square,40.8406194964327,-73.84219407604444,0,This spot is popular,4f997b4fd4f21823bb1f4fb3,Baskin-Robbins,40.84294,-73.84561,2702 E Tremont Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,0
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4d41f0caaed776ebb2a86997,Domino's Pizza,40.83587284041261,-73.92099072040764,41 E 167th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,West Farms,40.83947505672653,-73.87774474910545,0,This spot is popular,4baa3cfff964a52081563ae3,Prospect Coffee Shop,40.83757698149015,-73.88083923833605,1309 (Prospect Ave),4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,0
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4b990f47f964a520a55e35e3,SUBWAY / Convenient Store,40.84638264773299,-73.83186391347286,1749 Crosby Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4e8778509a529d24b7144b01,Pizza,40.83383055195339,-73.91589203894232,190 E 167th St,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,Morrisania,40.82359198585534,-73.90150648943059,0,This spot is popular,4dd98d57d1647fcf3e7e8ca4,Baskin-Robbins,40.824824,-73.899941,1041 Prospect Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,0
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4f32aedd19836c91c7ef8655,Tulcingo Bakery,40.833839,-73.921214,85 McClellan St,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,0
+New York,Soundview,40.821012197914015,-73.86574609554924,0,This spot is popular,4cc63e36bde8f04dcbfeb54b,Golden City Chinese Restaurant,40.82143531101194,-73.86637130850734,805 Soundview Ave,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,0
+New York,Pelham Parkway,40.85741349808865,-73.85475564017999,0,This spot is popular,4dab094ccda1652a2b99c1c9,Ana's Bakery & Cafe,40.85612342,-73.8558448,2125 Williamsbridge Rd,4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,0
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4e5ff9e952b1260c120c5ffa,Hudson Parkway Pharmacy,40.905276,-73.900574,5700 Mosholu Ave,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,0
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,55664d9e498e10d4e57c5647,Papa John's Pizza,40.852413177490234,-73.90889739990234,1979 Jerome Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4cdf3bbf78ddf04d6ec29f98,Domino's Pizza,40.8545414547471,-73.90703652800767,2075 Jerome Ave,4bf58dd8d48988d1ca941735,Pizza Place,https://ss3.4sqi.net/img/categories_v2/food/pizza_.png,0
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4d1e7dad0901721e668d82a5,Bravo Supermarkets,40.85393565221245,-73.91414402326542,127 W Burnside Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,0
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,51a3c054498e210b7bf17b93,Baskin Robbins Bronx,40.859725301922786,-73.89726689544588,"Bronx, NY",4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,0
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,59721da32f97ec4733ccf995,Andiamo Cafe,40.861625,-73.897947,2467 Grand Concourse (188th Street),4bf58dd8d48988d16d941735,Café,https://ss3.4sqi.net/img/categories_v2/food/cafe_.png,0
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4de4e746d4c0704405a58940,Frank And Sons Deli & Grocery,40.822531906070836,-73.81077386877354,Park Dr. (John Walker Jr. Way),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,University Heights,40.85572707719664,-73.9104159619131,0,This spot is popular,4d1ea7a4f7a9a143751f1d9f,Skyline Deli,40.85417876,-73.91460078333333,155 w. Burnside ave (loring place south),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4e4dd5c4bd4101d0d79c518b,Dunkin' Donuts,40.86223092460704,-73.89076145564486,384 E 194th St,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,0
+New York,Concourse,40.83428380733851,-73.91558941773444,0,This spot is popular,4c1e62dbb306c92823f666b7,Star Gourmet Deli,40.83406100091553,-73.91734454154492,797 Avenue of the Americas (btw W 27th & 28th),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,5206786811d2ffb53ef597d0,Ruane's Deli,40.822433,-73.810703,"Bronx, NY",4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4b8de141f964a520d61133e3,Carvel,40.84758104769016,-73.83168586182923,3011 Westchester Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,0
+New York,Longwood,40.81509904545822,-73.8957882009446,0,This spot is popular,4db779d16a2349392ff101b9,Brotherhood Gourmet Deli,40.815831770507806,-73.9010621137162,703 Southern Blvd (Leggett Avenue),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Pelham Bay,40.85064140940335,-73.8320737824047,0,This spot is popular,4db7288e4b223ed35f09102d,Thin Is In,40.85126017003757,-73.83003169695941,3190 Westchester Ave,4bf58dd8d48988d175941735,Gym / Fitness Center,https://ss3.4sqi.net/img/categories_v2/building/gym_.png,0
+New York,Morris Park,40.847549063536334,-73.85040178030421,0,This spot is popular,4bba8c6f935e95215a522890,24 Hour Store,40.850322,-73.851568,1136 Morris Park Avenue (Williamsbridge Road),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4e249d40483b041af20b09e9,Mosholu Deli,40.9054676120557,-73.90032972550054,5706 Mosholu Ave (Fieldston Road),4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,5a10de68e97dfb10df745cdb,Dunkin' Donuts/Baskin Robbins,40.80759,-73.91892,513 E 138th St (Brook Ave),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,0
+New York,Baychester,40.866858107252696,-73.83579759808117,0,This spot is popular,58582b156431e554e165d909,Moe's Southwest Grill,40.86631,-73.83032,200 Baychester Ave,4bf58dd8d48988d1c1941735,Mexican Restaurant,https://ss3.4sqi.net/img/categories_v2/food/mexican_.png,0
+New York,Mott Haven,40.80623874935177,-73.91609987487575,0,This spot is popular,4e95a147f5b90ceed072b3bb,Wolf's Delicatessen,40.80368891950913,-73.91547867653566,17 Trinity Pl,4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Morris Heights,40.84789792606271,-73.91967159119565,0,This spot is popular,4bb2434d14cfd13a4eb314ab,Rite Aid,40.845969,-73.918525,88 Featherbed Ln,4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,0
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4ceff74d82125481209c6ca1,Gruenbaum's Bakery,40.90612976692664,-73.90466657185551,5663 Riverdale Ave (259 St),4bf58dd8d48988d16a941735,Bakery,https://ss3.4sqi.net/img/categories_v2/food/bakery_.png,0
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4bc8660414d7952114f168e9,Duane Reade,40.86208985,-73.8944704,306 E FORDHAM RD (KINGSBRIDGE RD),4bf58dd8d48988d10f951735,Pharmacy,https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_.png,0
+New York,Longwood,40.81509904545822,-73.8957882009446,0,This spot is popular,4cfe98937945224be08396e7,Dunkin Donuts,40.816721967853866,-73.89233690186148,880 Garrison Ave (Garrison Ave),4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,0
+New York,Baychester,40.866858107252696,-73.83579759808117,0,This spot is popular,4ce01177f8a4a1437233e2bc,SUBWAY,40.86862220285062,-73.83405221251073,2829 Edson Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Clason Point,40.80655112003589,-73.85414416189266,0,This spot is popular,4e5bdca018a8c204752b190b,Shore Haven bikepath,40.80746238044827,-73.85447516703087,New York,4bf58dd8d48988d163941735,Park,https://ss3.4sqi.net/img/categories_v2/parks_outdoors/park_.png,0
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4ee959ab30f8b39980e53bd9,Pelham Bay Diner,40.86537502090643,-73.83724559229154,"Bronx, NY 10469",4bf58dd8d48988d14e941735,American Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,0
+New York,Soundview,40.821012197914015,-73.86574609554924,0,This spot is popular,4e6d29a0b0fb273d16817e6c,King Dragon Restaurant,40.81675713247213,-73.86536348088099,1749 Randall Ave,4bf58dd8d48988d145941735,Chinese Restaurant,https://ss3.4sqi.net/img/categories_v2/food/asian_.png,0
+New York,Pelham Gardens,40.86296562477998,-73.84161194831223,0,This spot is popular,4bbf6cb682a2ef3b53c42cd2,SUBWAY,40.86242730084521,-73.8437642917726,2451 Eastchester Rd,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Bedford Park,40.870185164975325,-73.8855121841913,0,This spot is popular,4e4dd5c0bd4101d0d79c5122,Dunkin' Donuts,40.873236,-73.88584634606862,215 E 201st St,4bf58dd8d48988d148941735,Donut Shop,https://ss3.4sqi.net/img/categories_v2/food/donuts_.png,0
+New York,High  Bridge,40.836623010706056,-73.9261020935813,0,This spot is popular,4eb7d4a59a52ad1e3ff0acb4,Dogout Food Center,40.83404930742646,-73.92229904390388,"2 E 167th St, Bronx, NY 10452",4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Fordham,40.86099679638654,-73.89642655981623,0,This spot is popular,4e4ce18bbd413c4cc66ceae0,3 Way,40.85879673736612,-73.89603817054319,384 E 183rd St,4bf58dd8d48988d1c4941735,Restaurant,https://ss3.4sqi.net/img/categories_v2/food/default_.png,0
+New York,City Island,40.84724670491813,-73.78648845267413,0,This spot is popular,4e24a5e3227150225032fd28,To Go Express,40.85131704004002,-73.7886271304332,New York,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,North Riverdale,40.90854282950666,-73.90453054908927,0,This spot is popular,4f32100f19833175d60ccd27,Compass Group USA,40.91251,-73.90256,6301 Riverdale Ave,4bf58dd8d48988d1e0931735,Coffee Shop,https://ss3.4sqi.net/img/categories_v2/food/coffeeshop_.png,0
+New York,Olinville,40.87137078192371,-73.86332361652777,0,This spot is popular,4f274ae7e4b01b0c624fd10b,Brave Deli Grocery,40.87115020722153,-73.86654071496939,"712 Burke Ave, Bronx, NY 10467",4bf58dd8d48988d146941735,Deli / Bodega,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Edgewater Park,40.821986118163494,-73.81388514428619,0,This spot is popular,4bd9b92b0115c9b6635f7880,Ice Capades,40.820364288914,-73.81795212575018,4011 E Tremont Ave,4bf58dd8d48988d1c9941735,Ice Cream Shop,https://ss3.4sqi.net/img/categories_v2/food/icecream_.png,0
+New York,Country Club,40.844245936947374,-73.8240992675385,0,This spot is popular,4c83e7bf47cc224b0f73939f,SUBWAY,40.84328,-73.826175,Bruckner Expy,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
+New York,Soundview,40.821012197914015,-73.86574609554924,0,This spot is popular,4c1f9adf920076b02101c5e9,Papa Chu Deli and Grocery,40.82278411055233,-73.8644980907272,1752 Lafayette Ave,4bf58dd8d48988d118951735,Grocery Store,https://ss3.4sqi.net/img/categories_v2/shops/food_grocery_.png,0
+New York,Melrose,40.819754370594936,-73.90942160757436,0,This spot is popular,4c3494f23896e21e57bfeb90,SUBWAY,40.82032349244594,-73.91296281845861,3044 3rd Ave,4bf58dd8d48988d1c5941735,Sandwich Place,https://ss3.4sqi.net/img/categories_v2/food/deli_.png,0
